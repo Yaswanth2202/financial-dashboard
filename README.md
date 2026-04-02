@@ -1,113 +1,163 @@
 # Finance Dashboard (Frontend-only)
 
-Polished, responsive personal finance dashboard UI built for frontend assessments: clean component boundaries, lightweight state management, role-based behavior, and UX details that make it feel like a real product — **no backend required**.
+A responsive personal finance dashboard designed to demonstrate clean UI design, structured state management, and intuitive user interactions in a frontend-only environment.
 
-## Tech stack
-- **React + Vite + TypeScript**
-- **Tailwind CSS** (styling + responsive layout)
-- **Recharts** (charts)
-- **Zustand** (lightweight global state)
-- **localStorage persistence** (via Zustand persist middleware)
-- **date-fns** (date formatting)
-- **lucide-react** (icon set)
-- **clsx + tailwind-merge** (className ergonomics)
+All visualizations and insights are derived from transaction data in real time. No backend services are used.
 
-## Product goals (what this demonstrates)
-- **Information architecture**: overview → trends → transactions → insights
-- **Strong UI clarity**: clear hierarchy, fast scanning, responsive layouts
-- **State hygiene**: centralized store, derived selectors, persistence
-- **Role-aware UI**: Viewer vs Admin behaviors are obvious and testable
+---
+
+## Tech Stack
+
+- React + Vite + TypeScript  
+- Tailwind CSS  
+- Recharts  
+- Zustand (state management)  
+- localStorage (persistence)  
+- date-fns  
+- lucide-react  
+- clsx + tailwind-merge  
+
+---
+
+## Overview
+
+This project focuses on building a clear and usable interface for understanding personal financial data.
+
+It demonstrates:
+
+- Structured information flow (overview → trends → transactions → insights)  
+- Consistent and readable UI design  
+- Centralized state management with derived data  
+- Simple role-based UI behavior  
+
+---
 
 ## Features
-### Dashboard overview
-- **Metric cards**: Total Balance, Total Income, Total Expenses, Savings Rate (derived from data)
-- **Charts**
-  - Income vs Expenses (last 6 months)
-  - Spending breakdown by category (expenses, top categories)
-  - Balance trend (net accumulation over months)
-- **Empty states** for charts when data is missing
+
+### Dashboard Overview
+
+- Summary cards:
+  - Total Balance  
+  - Total Income  
+  - Total Expenses  
+  - Savings Rate  
+
+- Charts:
+  - Income vs Expenses (last 6 months)  
+  - Spending breakdown by category  
+  - Balance trend over time  
+
+- Graceful handling of empty states  
+
+---
 
 ### Transactions
-- **Fast scanning** list/table with clear positive/negative styling
-- **Search** by keyword (merchant/description, type, category, date)
-- **Filters**: type + category
-- **Sorting**: date or amount + direction toggle
-- **Pagination**: keeps the page compact as data grows
-- **Empty state** when filters match nothing
 
-### Role-based UI (frontend-only simulation)
+- Tabular and mobile-friendly views  
+- Search across multiple fields  
+- Filtering by type and category  
+- Sorting by date or amount  
+- Pagination for scalability  
+- Empty state handling  
+
+---
+
+### Role-Based UI (Frontend Simulation)
+
 - **Viewer**
-  - Read-only (cannot add/edit/delete)
-  - Admin buttons are disabled with clear affordances
+  - Read-only access  
+  - Management actions disabled  
+
 - **Admin**
-  - Add, edit, delete transactions
-  - Export transactions to **CSV** or **JSON**
-  - Reset data back to the seed dataset
+  - Add, edit, delete transactions  
+  - Export data (CSV / JSON)  
+  - Reset dataset  
+
+---
 
 ### Insights
-3–5 insight cards derived from the dataset (not hardcoded), including:
-- Highest spending category
-- Peak expense month
-- Expense-to-income ratio
-- Top expense merchant
-- Month-over-month expense trend (when enough data exists)
 
-### Persistence & theme
-- **Transactions**, **role**, and **theme** are persisted in `localStorage`
-- **Dark mode toggle** with a calm, premium palette
+Insight cards are computed from transaction data and update automatically:
 
-## Folder structure
-```txt
+- Highest spending category  
+- Peak expense month  
+- Expense-to-income ratio  
+- Top expense merchant  
+- Month-over-month expense trend  
+
+---
+
+### Persistence & Theme
+
+- Transactions, role, and theme are persisted in localStorage  
+- Light and dark mode supported  
+
+---
+
+## Project Structure
+
 src/
   app/                  App composition + layout
   components/           Reusable UI + layout components
-  data/                 Mock seed data + constants
-  domain/               Types (Transaction, Category, Role, etc.)
-  features/             Feature modules (dashboard / transactions / insights)
-  store/                Zustand store (+ localStorage persistence)
-  utils/                Formatting, export helpers, finance calculations
-```
+  data/                 Mock data + constants
+  domain/               Type definitions
+  features/             Feature modules (dashboard, transactions, insights)
+  store/                Zustand store + persistence
+  utils/                Helpers (formatting, calculations, export)
 
-## Getting started
+---
+
+## Getting Started
+
 ### Prerequisites
-- Node.js 18+ (recommended)
+- Node.js 18+
 
-### Install & run
-```bash
+### Run locally
+
+~~~bash
 npm install
 npm run dev
-```
+~~~
 
 ### Build
-```bash
+
+~~~bash
 npm run build
 npm run preview
-```
+~~~
 
-## How to evaluate quickly (assessment checklist)
-- Switch **Role** between **Viewer** and **Admin**
-- In **Admin**, add/edit/delete a transaction and verify:
-  - metrics and charts update immediately
-  - insights update (highest category, peak month, etc.)
-- Try searching for:
-  - a merchant name (e.g. `FreshMart`)
-  - a formatted date (e.g. `Mar`)
-  - an amount (e.g. `45`)
-- Toggle **dark mode** and confirm contrast stays readable
+---
 
-## Data handling notes
-- Transactions are stored as:
-  - `amount` **positive**
-  - `type` determines sign (income vs expense) in UI calculations
-- Overview metrics, charts, and insights are computed from the transaction list at render-time with memoization.
+## Quick Demo Guide
 
-## Role behavior notes
-- The role selector simulates access control **on the frontend**:
-  - Admin actions are hidden/disabled when the role is Viewer.
-  - No backend calls are made.
+To explore the application:
 
-## Architectural notes
-- **Global state**: `src/store/useAppStore.ts` (Zustand) holds transactions, role, theme, and transaction filters.
-- **Derived data**: finance calculations live in `src/utils/finance.ts`; transaction filtering/sorting lives in `src/features/transactions/transactionsSelectors.ts`.
-- **Persistence**: stored under `finance-dashboard:v1` in `localStorage` (role/theme/transactions).
+- Switch between **Viewer** and **Admin** roles  
+- In Admin mode, create or edit a transaction and observe updates across the UI  
+- Use search and filters to refine the transaction list  
+- Toggle dark mode to view theme support  
 
+---
+
+## Data Handling
+
+- Transaction amounts are stored as positive values  
+- Type (income/expense) determines how values are interpreted  
+- All metrics and charts are derived from the transaction list  
+
+---
+
+## Notes
+
+- This is a frontend-only implementation  
+- Role behavior is simulated for demonstration purposes  
+- No external APIs or backend services are used  
+
+---
+
+## Architecture
+
+- Zustand manages global state (transactions, filters, role, theme)  
+- Derived calculations are handled in utility functions  
+- Filtering and sorting logic is separated from UI components  
+- State persistence is handled via localStorage  
