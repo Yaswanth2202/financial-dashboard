@@ -96,6 +96,12 @@ Insight cards are computed from transaction data and update automatically:
 
 ## Project Structure
 
+At the repository root:
+
+- `install-dependencies.bat` — Windows helper script  
+- `install-dependencies.sh` — macOS/Linux helper script  
+
+~~~txt
 src/
   app/                  App composition + layout
   components/           Reusable UI + layout components
@@ -104,19 +110,42 @@ src/
   features/             Feature modules (dashboard, transactions, insights)
   store/                Zustand store + persistence
   utils/                Helpers (formatting, calculations, export)
+~~~
 
 ---
 
+## Getting Started
 
 ### Prerequisites
-- Node.js 18+
 
-### Run locally
+- Node.js 18+ (includes npm)
+
+---
+
+### Install Dependencies
+
+You can install dependencies using the provided scripts:
+
+| Platform | Command |
+|----------|--------|
+| Windows | `.\install-dependencies.bat` |
+| macOS / Linux | `chmod +x install-dependencies.sh` → `./install-dependencies.sh` |
+
+Or manually:
 
 ~~~bash
 npm install
+~~~
+
+---
+
+### Run Locally
+
+~~~bash
 npm run dev
 ~~~
+
+---
 
 ### Build
 
@@ -142,7 +171,7 @@ To explore the application:
 
 - Transaction amounts are stored as positive values  
 - Type (income/expense) determines how values are interpreted  
-- All metrics and charts are derived from the transaction list  
+- All metrics, charts, and insights are derived from the transaction list  
 
 ---
 
